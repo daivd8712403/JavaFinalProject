@@ -12,14 +12,15 @@ class JTextFieldHintUI extends JTextField {
     private Font gainFont = new Font("Tahoma", Font.BOLD, 12);
     private Font lostFont = new Font("Tahoma", Font.ITALIC, 12);
 
+
     JTextFieldHintUI(final String hint) {
         this.hint = hint;
         setText(hint);
         setFont(lostFont);
         setForeground(Color.GRAY);
 
+        // JTextField focus listener
         this.addFocusListener(new FocusAdapter() {
-
             @Override
             public void focusGained(FocusEvent e) {
                 setBorder(new LineBorder(Color.BLACK));
@@ -42,6 +43,7 @@ class JTextFieldHintUI extends JTextField {
                     isEmpty = true;
 
                 if (isEmpty()) {
+                    // TextField is empty, display the hint string in gray.
                     setText(hint);
                     setFont(lostFont);
                     setForeground(Color.GRAY);
@@ -56,6 +58,7 @@ class JTextFieldHintUI extends JTextField {
 
     }
 
+    // Init the TextField
     void init() {
         setText(hint);
         setFont(lostFont);

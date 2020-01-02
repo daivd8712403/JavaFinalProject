@@ -63,9 +63,10 @@ public class CourseJTable extends JPanel{
         return selectRows;
     }
 
+    // Get data on the single row.
     private Vector<String> getTableRowData(int r) {
         Vector<String> data = new Vector<>();
-        // Get data on the single row.
+
         for(int i = 0; i < myCourseTable.getColumnCount(); i++) {
             data.addElement((String) myCourseTable.getValueAt(r, i));
         }
@@ -73,19 +74,23 @@ public class CourseJTable extends JPanel{
     }
 
     private static void createAndShowGUI() {
-        // Create, set window
+        // Create, set window.
         JFrame frame = new JFrame("E3B31 David Chen's 108_1 Courses");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Calculate the table size.
         int preferredSize = IntStream.of(MyCourse.columnPreferredWidth).sum();
 
         CourseJTable myTable = new CourseJTable();
         frame.add(myTable, BorderLayout.NORTH);
 
+        // Set the JTextFieldUI
         JTextFieldHintUI myTextField = new JTextFieldHintUI("File name");
         myTextField.setPreferredSize(new Dimension(200, 0));
         myTextField.init();
         frame.add(myTextField, BorderLayout.WEST);
 
+        // Set the JButton
         JButton myButton = new JButton("Click to export the selected data.");
         frame.add(myButton, BorderLayout.EAST);
         myButton.addMouseListener(new MouseAdapter() {
@@ -131,6 +136,8 @@ public class CourseJTable extends JPanel{
 
         // Set frame size
         frame.setSize(preferredSize, 490);
+
+        // Disable resize window.
         frame.setResizable(false);
         frame.setVisible(true);
     }

@@ -22,12 +22,14 @@ class CsvWriter {
             File file = new File(fileName);
             FileWriter excel = new FileWriter(file);
 
+            // Write the column name.
             for(int i = 0; i < model.getColumnCount(); i++){
                 excel.write(model.getColumnName(i) + "\t");
             }
 
             excel.write("\n");
 
+            // Write the rows in JTable name.
             for(int i = 0; i < model.getRowCount(); i++) {
                 for(int j = 0; j < model.getColumnCount(); j++) {
                     excel.write(model.getValueAt(i, j).toString()+"\t");

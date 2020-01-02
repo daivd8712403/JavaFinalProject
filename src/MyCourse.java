@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.Vector;
 
 public enum MyCourse implements Serializable {
+    // Course Data
     DSP("李清坤", 3, "Elective","A3-214", "Friday", "N/A"),
     IC_Design("黃淑絹", 3, "Elective", "A3-214", "Monday", "Tuesday"),
     MCU("古聖如", 3, "Required", "A3-214", "Monday", "Thursday"),
@@ -26,6 +27,7 @@ public enum MyCourse implements Serializable {
     private final String day1;
     private final String day2;
 
+    // Preferred width for each columns.
     public static int[] columnPreferredWidth = {150, 70, 60, 150, 100, 100, 100};
 
     // Get the all data in MyCourse into Vector<Vector>

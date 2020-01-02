@@ -15,6 +15,7 @@ public class CourseJTable extends JPanel{
     private CourseJTable() {
         super(new BorderLayout());
         myCourseTable = new JTable(MyCourse.getRowData(), MyCourse.getColumnName());
+
         // Set each column's width.
         IntStream.range(0, MyCourse.getColumnName().size()).forEach(i -> {
             TableColumnModel cm = myCourseTable.getColumnModel();
@@ -25,6 +26,8 @@ public class CourseJTable extends JPanel{
         // Disable table editor.
         myCourseTable.setDefaultEditor(Object.class, null);
         selectRows = myCourseTable.getSelectedRows();
+
+        // Set the scrollPane
         JScrollPane scrollPane = new JScrollPane(myCourseTable);
         add(scrollPane);
 
@@ -36,7 +39,7 @@ public class CourseJTable extends JPanel{
 
         // Row Sorter Listener
         myCourseTable.getRowSorter().addRowSorterListener(e -> {
-            // Sorter Changed, remove all the selections.
+            // Sorter Changed, remove all the selections and update the select rows.
             myCourseTable.removeRowSelectionInterval(0, myCourseTable.getRowCount() - 1);
             myCourseTable.removeColumnSelectionInterval(0, myCourseTable.getColumnCount() - 1);
             selectRows = myCourseTable.getSelectedRows();
@@ -49,6 +52,8 @@ public class CourseJTable extends JPanel{
                 super.mouseReleased(e);
                 // When the mouse released, get the rows that user select and store in a array.
                 selectRows = myCourseTable.getSelectedRows();
+
+                // Print the rows you selected.
                 System.out.print("Select " + selectRows.length +"  rows: ");
                 for(int i: selectRows) {
                     System.out.print(myCourseTable.getValueAt(i, 0) + ", ");
@@ -85,27 +90,27 @@ public class CourseJTable extends JPanel{
         frame.add(myTable, BorderLayout.NORTH);
 
         // Set the JTextFieldUI
-        JTextFieldHintUI myTextField = new JTextFieldHintUI("File name");
-        myTextField.setPreferredSize(new Dimension(200, 0));
-        myTextField.init();
-        frame.add(myTextField, BorderLayout.WEST);
+        JTextFieldHintUI fileTextField = new JTextFieldHintUI("File name");
+        fileTextField.setPreferredSize(new Dimension(200, 0));
+        fileTextField.init();
+        frame.add(fileTextField, BorderLayout.WEST);
 
         // Set the JButton
-        JButton myButton = new JButton("Click to export the selected data.");
-        frame.add(myButton, BorderLayout.EAST);
-        myButton.addMouseListener(new MouseAdapter() {
+        JButton exportButton = new JButton("Click to export the selected data.");
+        frame.add(exportButton, BorderLayout.EAST);
+        exportButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 // When button clicked, get the file name and the row data on the table.
-                if(!myTextField.isEmpty()) {
+                if(!fileTextField.isEmpty()) {
                     // File name not null.
                     if(myTable.getSelectRows().length == 0) {
                         // No table rows selected.
                         JOptionPane.showMessageDialog(frame, "Select at least one row on the table!", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }else {
                         // new a temp JTable to export and get the file name string.
-                        String fileName = myTextField.getText() + ".csv";
+                        String fileName = fileTextField.getText() + ".csv";
                         JTable tmpTable = new JTable(null, MyCourse.getColumnName());
 
                         // Get the row data user selected.
@@ -116,11 +121,11 @@ public class CourseJTable extends JPanel{
                         if(CsvWriter.getExist(fileName)) {
                             // File is exist, update file.
                             JOptionPane.showMessageDialog(frame, fileName + " updated!.", "message", JOptionPane.WARNING_MESSAGE);
-                            myTextField.init();
+                            fileTextField.init();
                         }else {
                             // File is not exist, create file.
                             JOptionPane.showMessageDialog(frame, fileName + " created.");
-                            myTextField.init();
+                            fileTextField.init();
                         }
 
                         // Write the CSV file.
@@ -128,7 +133,7 @@ public class CourseJTable extends JPanel{
                     }
                 }else {
                     // File name is null.
-                    myTextField.setBorder(new LineBorder(Color.RED));
+                    fileTextField.setBorder(new LineBorder(Color.RED));
                     JOptionPane.showMessageDialog(frame, "Enter the file name!", "message", JOptionPane.ERROR_MESSAGE);
                 }
             }

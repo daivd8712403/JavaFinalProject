@@ -58,6 +58,7 @@ public class CourseJTable extends JPanel{
         });
     }
 
+    // Get the rows on table that user selected.
     private int[] getSelectRows() {
         return selectRows;
     }

@@ -17,9 +17,7 @@ public class CourseJTable extends JPanel{
 
         // Set each column's width.
         IntStream.range(0, MyCourse.getColumnName().size()).forEach(i -> {
-            TableColumnModel cm = myCourseTable.getColumnModel();
-            TableColumn column = cm.getColumn(i);
-            column.setPreferredWidth(MyCourse.columnPreferredWidth[i]);
+            myCourseTable.getColumnModel().getColumn(i).setPreferredWidth(MyCourse.columnPreferredWidth[i]);
         });
 
         // Disable table editor.

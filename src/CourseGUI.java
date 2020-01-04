@@ -13,6 +13,7 @@ public class CourseGUI {
 
     private void createUIComponents() {
         myTable = new JTable(MyCourse.getRowData(), MyCourse.getColumnName());
+        // Disable data edition.
         myTable.setDefaultEditor(Object.class, null);
 
         // Set width.

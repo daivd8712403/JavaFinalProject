@@ -29,7 +29,7 @@ public enum MyCourse implements Serializable {
     private final String day2;
 
     // Preferred width for each columns.
-    public static int[] columnPreferredWidth = {150, 70, 60, 150, 100, 100, 100};
+    public static int[] columnPreferredWidth = {150, 80, 70, 130, 100, 95, 95};
     public static int columnWidthSum = IntStream.of(MyCourse.columnPreferredWidth).sum();
 
     // Get the all data in MyCourse into Vector<Vector>

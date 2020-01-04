@@ -12,7 +12,6 @@ class JTextFieldHintUI extends JTextField {
     private Font gainFont = new Font("Tahoma", Font.BOLD, 12);
     private Font lostFont = new Font("Tahoma", Font.ITALIC, 12);
 
-
     JTextFieldHintUI(final String hint) {
         this.hint = hint;
         setText(hint);

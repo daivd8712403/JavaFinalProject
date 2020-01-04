@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.Vector;
+import java.util.stream.IntStream;
 
 public enum MyCourse implements Serializable {
     // Course Data
@@ -29,6 +30,7 @@ public enum MyCourse implements Serializable {
 
     // Preferred width for each columns.
     public static int[] columnPreferredWidth = {150, 70, 60, 150, 100, 100, 100};
+    public static int columnWidthSum = IntStream.of(MyCourse.columnPreferredWidth).sum();
 
     // Get the all data in MyCourse into Vector<Vector>
     public static Vector<Vector> getRowData() {
